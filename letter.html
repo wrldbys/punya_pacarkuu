@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Untukmu 💌</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="letter-page-bg">
+    <!-- Floating deco -->
+    <div class="deco-star" style="top:5%; left:5%; animation-delay:0s;">💌</div>
+    <div class="deco-star" style="top:12%; right:7%; animation-delay:0.9s;">🌸</div>
+    <div class="deco-star" style="bottom:18%; left:6%; animation-delay:1.5s;">✨</div>
+    <div class="deco-star" style="bottom:10%; right:5%; animation-delay:0.5s;">🎀</div>
+    <div class="deco-star" style="top:55%; left:3%; animation-delay:2s;">⭐</div>
+
+    <div class="page-wrapper">
+        <!-- Envelope (shown first) -->
+        <div id="envelope-section">
+            <h1 class="page-title" style="text-align:center; margin-bottom:0.5rem;">Ada Surat Nihh! 💌</h1>
+            <p class="page-subtitle" style="text-align:center;">Bisa di klik aja yaa sayanggg~</p>
+
+            <div class="envelope-outer" id="envelope">
+                <div class="env-flap" id="env-flap"></div>
+                <div class="env-body">
+                    <div class="env-inside">
+                        <span style="font-size:3rem;">💌</span>
+                        <span>For my bini gwehh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Letter (shown after opening) -->
+        <div class="letter-card" id="letter-card">
+            <h2>Buat Sayangkuu ❤️</h2>
+            <p>
+                sebelumnya aku mau minta maaf dulu yaa, karena kemarin aku nggaaa sempet bikin surat atau ucapan secara langsungg. aku bener bener kelupaan sayang ehehehe, gapapa yaaa.
+            </p>
+            <p>
+                widihhhh uda 25 tahun aja niii sayangku, heheh. di umur yang ke-25 ini, semoga kamuuu bisa lebih banyak senyum yah, lebih banyak nemuin kebahagiaan, dan lebih banyak berterima kasih kee diri kamu sendiri. karenaaaa setelah semua yang udaaa kamu lewatin sampai hari ini, kamu deserve banget buat dapet hal hal baik dalam hidup kamu kedepannya.
+            </p>
+            <p>
+                makasiiii yaa sayangg, karena kamu udaaa bertahan sejauh ini. aku ngga tau semua hal yang pernah kamu rasain dan hadepin, tapi aku tau pasti ngga semua hari berjalan gampangg buat kamu. makanya aku bangga banget sama kamuu yang masih terus bisa bertahan sampe detik ini. makasiii yaa karena udah tetep ada di dunia ini dan nggaa nyerah.
+            </p>
+            <p>
+                aku harap di umur yang baru ini, kamuu nggaa terlalu keras sama diri kamu sendiri yah. kalo suatu saat kamu cape, sedih, atau ngerasa semuanya berat banget, istirahat dulu gapapa yaa. jangan pressure diri kamu sendiri yaa sayangg.
+            </p>
+            <p>
+                dan satu hal yang harus selalu kamu inget yangg, kamu ngga pernah sendirian. kamu harus selalu inget kalo ada seseorang yang sayang bangettt sama kamu dan selalu berharap yang terbaik buat kamu. aku tau akuuu belom bisa ada di samping kamu, tapi percaya deh, aku selalu ada buat kamuuu sayang, kalo gaa ketiduran tp ya 😭😭
+            </p>
+            <p>
+                makasiiii juga ya sayangg karena udah jadi bagian dari hidup akuuu. banyak hal yang kerasa lebih berharga, lebih ringan, dan lebih tenang sejak aku sama kamuuu. aku bersyukur bgttt bisa kenal kamuuu, bisa denger cerita ceritanya kamuuu, dan bisa ngeliat kamuuu tumbuh sejauh ini.
+            </p>
+            <p>
+                dann di umur yang ke-25 tahun iniii, semoga semua apapun pokooonya yang buat kamu bahagia bakal kebuka lebih lebar buat kamuuu. semoga kamu dipertemukan sama orang orang baik, kesempatan kesempatan baik, dan hal hal yang selalu bikin hati kamuuu ngerasa lebih tenang. semoga semuaa doaaa yang selama ini kamu simpen jugaaa pelan pelan dikabulin satu per satuuu.
+            </p>
+            <p>
+                sekali lagiiiii, selamat ulang tahun yaa sayanggg. makasih karena udaa jadi diri kamu sendiri. kamu berharga, kamu kerennn, dan kamu deserve dapetin banyak hal hal baik di hidup ini. aku bangga sama kamuuu, aku bangga punya kamuuu.
+            </p>
+
+            <div class="letter-sign">bahagia selalu yaa, sayangkuu 💗</div>
+            <a href="gallery.html" class="btn-cute" style="margin-top:1.5rem; display:inline-block;">
+                Let's see, apa selanjutnyaa
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const envelope = document.getElementById('envelope');
+        const flap = document.getElementById('env-flap');
+        const envSection = document.getElementById('envelope-section');
+        const letterCard = document.getElementById('letter-card');
+
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('open');
+            setTimeout(() => {
+                envSection.style.display = 'none';
+                letterCard.classList.add('visible');
+            }, 700);
+        });
+
+        // Cursor trail
+        const emojis = ['✨','💌','🌸','💙','🎀','⭐'];
+        document.addEventListener('mousemove', e => {
+            if (Math.random() > 0.15) return;
+            const el = document.createElement('div');
+            el.className = 'cursor-trail';
+            el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+            el.style.left = e.pageX - 10 + 'px';
+            el.style.top = e.pageY - 10 + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 900);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter PIN 🔐</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating decorations -->
+    <div class="deco-star" style="top:8%; left:5%; animation-delay:0s;">⭐</div>
+    <div class="deco-star" style="top:15%; right:8%; animation-delay:0.7s;">🌸</div>
+    <div class="deco-star" style="bottom:20%; left:10%; animation-delay:1.2s;">🫧</div>
+    <div class="deco-star" style="bottom:10%; right:6%; animation-delay:0.4s;">✨</div>
+    <div class="deco-star" style="top:50%; left:3%; animation-delay:1.8s;">🎀</div>
+
+    <div class="page-wrapper">
+        <div class="cute-card" id="pin-box" style="max-width:400px;">
+            <div class="login-header">
+                <div class="login-icon">🔐</div>
+                <h1 class="page-title" style="font-size:2rem;">PIN Rahasia</h1>
+                <p class="page-subtitle">Masukkin PIN nya, hayo apaa😏</p>
+            </div>
+
+            <div class="pin-display" id="pin-display">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+            </div>
+
+            <div class="keypad">
+                <button class="keypad-btn" data-val="1">1</button>
+                <button class="keypad-btn" data-val="2">2</button>
+                <button class="keypad-btn" data-val="3">3</button>
+                <button class="keypad-btn" data-val="4">4</button>
+                <button class="keypad-btn" data-val="5">5</button>
+                <button class="keypad-btn" data-val="6">6</button>
+                <button class="keypad-btn" data-val="7">7</button>
+                <button class="keypad-btn" data-val="8">8</button>
+                <button class="keypad-btn" data-val="9">9</button>
+                <button class="keypad-btn action" id="btn-del">❌</button>
+                <button class="keypad-btn" data-val="0">0</button>
+                <button class="keypad-btn action" id="btn-enter">🔓</button>
+            </div>
+
+            <p class="pin-msg" id="pin-msg"></p>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT = '140601';
+        const MAX = 6;
+        let pin = '', attempts = 0, locked = false;
+
+        const dots = document.querySelectorAll('.pin-dot');
+        const box = document.getElementById('pin-box');
+        const msg = document.getElementById('pin-msg');
+        const allBtns = document.querySelectorAll('.keypad-btn');
+
+        function updateDots() {
+            dots.forEach((d, i) => d.classList.toggle('filled', i < pin.length));
+        }
+
+        function pressKey(v) {
+            if (locked || pin.length >= MAX) return;
+            pin += v;
+            updateDots();
+        }
+
+        function del() {
+            if (locked) return;
+            pin = pin.slice(0, -1);
+            updateDots();
+        }
+
+        function check() {
+            if (locked || pin.length === 0) return;
+            if (pin === CORRECT) {
+                msg.style.color = '#4CAF50';
+                msg.textContent = 'Yeeaayyy benarr sayangkuu😘...';
+                setTimeout(() => window.location.href = 'birthday.html', 1000);
+            } else {
+                attempts++;
+                pin = ''; updateDots();
+                box.classList.remove('error-shake');
+                void box.offsetWidth;
+                box.classList.add('error-shake');
+                if (attempts >= 3) {
+                    locked = true;
+                    allBtns.forEach(b => { b.style.opacity='0.4'; b.style.pointerEvents='none'; });
+                    let t = 10;
+                    const timer = setInterval(() => {
+                        msg.style.color = '#FF9800';
+                        msg.textContent = `Terkunci sayang ih! Coba lagi dehh, nungguuu ${t} detik ⏳`;
+                        t--;
+                        if (t < 0) {
+                            clearInterval(timer);
+                            locked = false; attempts = 0;
+                            allBtns.forEach(b => { b.style.opacity='1'; b.style.pointerEvents='all'; });
+                            msg.textContent = '';
+                        }
+                    }, 1000);
+                } else {
+                    msg.style.color = '#E57373';
+                    msg.textContent = `Idihhh salahhh!!!! Sisa percobaannya tinggal ${3 - attempts} yaa`;
+                }
+            }
+        }
+
+        document.querySelectorAll('.keypad-btn[data-val]').forEach(b => b.addEventListener('click', () => pressKey(b.dataset.val)));
+        document.getElementById('btn-del').addEventListener('click', del);
+        document.getElementById('btn-enter').addEventListener('click', check);
+
+        // Cursor trail - pink hearts
+        document.addEventListener('mousemove', e => {
+            if (Math.random() > 0.18) return;
+            const el = document.createElement('div');
+            el.className = 'cursor-trail cursor-heart';
+            el.style.left = e.pageX - 10 + 'px';
+            el.style.top = e.pageY - 10 + 'px';
+            el.style.fontSize = (0.8 + Math.random() * 0.8).toFixed(1) + 'rem';
+            el.style.opacity = (0.35 + Math.random() * 0.4).toFixed(2);
+            el.textContent = '♥';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 900);
+        });
+    </script>
+</body>
+</html>

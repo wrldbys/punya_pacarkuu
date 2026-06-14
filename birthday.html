@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sayangnya Akuuuu!!!!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="birthday-bg">
+    <!-- Floating deco -->
+    <div class="deco-star" style="top:5%; left:4%; animation-delay:0s;">🎈</div>
+    <div class="deco-star" style="top:10%; right:6%; animation-delay:0.8s;">🎉</div>
+    <div class="deco-star" style="bottom:15%; left:7%; animation-delay:1.4s;">⭐</div>
+    <div class="deco-star" style="bottom:8%; right:5%; animation-delay:0.3s;">🎀</div>
+    <div class="deco-star" style="top:45%; right:3%; animation-delay:2s;">✨</div>
+    <div class="deco-star" style="top:60%; left:2%; animation-delay:1s;">🫧</div>
+
+    <div class="page-wrapper">
+        <div class="cute-card" style="max-width:520px;">
+            <h1 class="page-title">Hei, Pacar Akuu!!!</h1>
+            <p class="page-subtitle">Coba tiup lilinnyaa 🎂</p>
+
+            <!-- CAKE -->
+            <div class="cake-wrapper">
+                <!-- Bottom tier -->
+                <div class="c-tier1">
+                    <div class="c-dots">
+                        <div class="c-dot"></div><div class="c-dot"></div>
+                        <div class="c-dot"></div><div class="c-dot"></div>
+                        <div class="c-dot"></div>
+                    </div>
+                    <div class="c-tier1-deco"></div>
+                </div>
+                <!-- Top tier -->
+                <div class="c-tier2">
+                    <div class="c-tier2-deco"></div>
+                </div>
+                <!-- Drip icing -->
+                <div class="c-drip"></div>
+                <!-- Stars on cake -->
+                <div class="c-star" style="bottom:200px; left:15px;">⭐</div>
+                <div class="c-star" style="bottom:125px; right:10px;">🌸</div>
+                <!-- Candles -->
+                <div class="candle-group">
+                    <div class="candle-item">
+                        <div class="candle-flame" id="flame1"></div>
+                        <div class="candle-stick" style="background:#F7C5C5;"></div>
+                    </div>
+                    <div class="candle-item">
+                        <div class="candle-flame" id="flame2"></div>
+                        <div class="candle-stick" style="background:#7EB8CC;"></div>
+                    </div>
+                    <div class="candle-item">
+                        <div class="candle-flame" id="flame3"></div>
+                        <div class="candle-stick" style="background:#FFF0A5;"></div>
+                    </div>
+                </div>
+                <!-- Plate -->
+                <div class="c-plate"></div>
+            </div>
+
+            <!-- Blow button -->
+            <button class="btn-cute" id="blow-btn">Tiup Lilinnyaa</button>
+
+            <!-- Birthday message (hidden until blown) -->
+            <div class="bday-msg" id="bday-msg">
+                <h1>Happy Birthday Sayangnyaa Akuuu!!!!</h1>
+                <p>- 14 Juni 2001 -</p>
+            </div>
+
+            <a href="letter.html" class="btn-cute" id="next-btn" style="background:#F7C5C5; box-shadow: 0 6px 0px #f0a0a0;">
+                Buka Suratnyaa 💌
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const blowBtn = document.getElementById('blow-btn');
+        const msg = document.getElementById('bday-msg');
+        const next = document.getElementById('next-btn');
+        const flames = [
+            document.getElementById('flame1'),
+            document.getElementById('flame2'),
+            document.getElementById('flame3'),
+        ];
+
+        blowBtn.addEventListener('click', () => {
+            flames.forEach(f => f.classList.add('off'));
+            blowBtn.style.display = 'none';
+            msg.style.display = 'block';
+            setTimeout(() => msg.classList.add('show'), 50);
+            next.classList.add('show');
+
+            const end = Date.now() + 3000;
+            const colors = ['#7EB8CC','#B8D9E6','#F7C5C5','#FFF0A5','#FAD8C3'];
+            (function frame() {
+                confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0 }, colors });
+                confetti({ particleCount: 6, angle: 120, spread: 60, origin: { x: 1 }, colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            })();
+        });
+
+        // Cursor trail
+        const emojis = ['✨','🎈','💙','⭐','🎉','🫧'];
+        document.addEventListener('mousemove', e => {
+            if (Math.random() > 0.15) return;
+            const el = document.createElement('div');
+            el.className = 'cursor-trail';
+            el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+            el.style.left = e.pageX - 10 + 'px';
+            el.style.top = e.pageY - 10 + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 900);
+        });
+    </script>
+</body>
+</html>
