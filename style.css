@@ -775,19 +775,24 @@ body::before {
 /* ======= RESPONSIVE ======= */
 @media (max-width: 700px) {
     .gl-row, .gl-row--reverse { flex-direction: column; }
-    .gl-card--big { width: 100%; height: 260px; }
-    .gl-quad { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
-    .gl-card--small { height: 180px; }
+    .gl-card--big { width: 100%; height: 280px; }
+    .gl-quad { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .gl-card--small { height: 220px; }
     .gl-feature { flex-direction: column; }
-    .gl-card--feature { width: 100%; height: 240px; flex-shrink: unset; }
-    .gl-feature-side { flex-direction: row; }
-    .gl-card--side { height: 150px; }
+    .gl-card--feature { width: 100%; height: 280px; flex-shrink: unset; }
+    .gl-feature-side { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; flex-direction: unset; }
+    .gl-card--side { height: 200px; }
     .gl-text-inner h2 { font-size: 1.8rem; }
     .page-title { font-size: 2rem; }
 }
 @media (max-width: 420px) {
-    .gl-quad { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-    .gl-card--small { height: 150px; }
-    .gl-card--side { height: 120px; }
+    .gl-quad { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+    .gl-card--small { height: 190px; }
+    .gl-feature-side { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+    .gl-card--side { height: 190px; }
     .gl-front::before { width: 48px; }
+    .gl-back { padding: 1rem 0.6rem; gap: 0.5rem; }
+    .gl-back .back-quote { font-size: 0.7rem; line-height: 1.4; }
+    .gl-back .back-emoji { font-size: 1.8rem; }
+    .gl-text-inner h2 { font-size: 1.6rem; }
 }
